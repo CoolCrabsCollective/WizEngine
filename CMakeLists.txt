@@ -6,20 +6,15 @@ if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     add_definitions(-Wall -ansi -Wno-deprecated -pthread -Wpedantic)
 endif()
 
+# applies OS type C++ macro
 if(WIN32)
-    # static linking of important libraries on windows
-    set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lpthread -Wl,--no-whole-archive")
-    add_compile_definitions(OS_WINDOWS) # applies C++ macro
+    add_compile_definitions(OS_WINDOWS)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    add_compile_definitions(OS_MAC) # applies C++ macro
+    add_compile_definitions(OS_MAC)
 elseif(UNIX)
-    # static linking of libraries on linux
-    set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,-lpthread -lc")
-    add_compile_definitions(OS_UNIX) # applies C++ macro
+    add_compile_definitions(OS_UNIX)
 elseif(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
-    add_compile_definitions(OS_SWITCH) # applies C++ macro
+    add_compile_definitions(OS_SWITCH)
 endif()
 
 #
