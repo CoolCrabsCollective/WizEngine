@@ -2,10 +2,10 @@
 // Created by Alexander Winter on 2022-02-10.
 //
 
-#include "logging/MultiLogger.h"
+#include <WIZ/logging/MultiLogger.h>
 
 #include <utility>
-#include "logging/Logger.h"
+#include <WIZ/logging/Logger.h>
 
 MultiLogger::MultiLogger(const std::vector<Logger*>& loggers)
     : loggers() {

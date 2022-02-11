@@ -7,7 +7,7 @@
 
 
 #include <cstdint>
-#include <logging/Logger.h>
+#include <WIZ/logging/Logger.h>
 #include <map>
 #include <memory>
 #include <stdexcept>

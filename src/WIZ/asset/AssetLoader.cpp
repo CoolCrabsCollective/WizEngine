@@ -3,7 +3,7 @@
 //
 
 #include <chrono>
-#include "asset/AssetLoader.h"
+#include "WIZ/asset/AssetLoader.h"
 #include "SFML/Graphics/Texture.hpp"
 
 AssetLoader::AssetLoader(const Logger& logger)

@@ -2,7 +2,7 @@
 // Created by Alexander Winter on 2022-02-10.
 //
 
-#include "logging/TagLoggerWrapper.h"
+#include "WIZ/logging/TagLoggerWrapper.h"
 
 #include <utility>
 #include <iomanip>

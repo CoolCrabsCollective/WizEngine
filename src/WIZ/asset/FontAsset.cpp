@@ -3,7 +3,7 @@
 //
 
 #include <stdexcept>
-#include "asset/FontAsset.h"
+#include "WIZ/asset/FontAsset.h"
 
 FontAsset::FontAsset(const std::string& path)
     : SinglePathAsset(path) {}

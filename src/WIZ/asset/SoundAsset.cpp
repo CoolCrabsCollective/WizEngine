@@ -3,7 +3,7 @@
 //
 
 #include <stdexcept>
-#include "asset/SoundAsset.h"
+#include "WIZ/asset/SoundAsset.h"
 
 SoundAsset::SoundAsset(const std::string& path)
     : SinglePathAsset(path) {}

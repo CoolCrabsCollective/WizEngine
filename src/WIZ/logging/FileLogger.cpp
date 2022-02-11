@@ -2,7 +2,7 @@
 // Created by Alexander Winter on 2022-02-10.
 //
 
-#include "logging/FileLogger.h"
+#include <WIZ/logging/FileLogger.h>
 
 FileLogger::FileLogger(const std::string& filePath, LogLevel logLevel) : LoggerBase(logLevel) {
     filePointer.open(filePath, std::ios::out | std::ios::app);

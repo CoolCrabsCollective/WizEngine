@@ -2,7 +2,7 @@
 // Created by Alexander Winter on 2022-02-10.
 //
 
-#include "logging/StdOutLogger.h"
+#include "WIZ/logging/StdOutLogger.h"
 
 #include <iostream>
 

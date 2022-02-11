@@ -5,9 +5,9 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
-#include <util/FileUtil.h>
-#include <util/StringUtil.h>
-#include "logging/DailyFileLogger.h"
+#include <WIZ/util/FileUtil.h>
+#include <WIZ/util/StringUtil.h>
+#include <WIZ/logging/DailyFileLogger.h>
 
 
 DailyFileLogger::DailyFileLogger(std::string directory, LogLevel level)

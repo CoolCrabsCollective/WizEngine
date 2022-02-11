@@ -2,7 +2,7 @@
 // Created by Alexander Winter on 2022-02-10.
 //
 
-#include "util/FileUtil.h"
+#include "WIZ/util/FileUtil.h"
 
 int internal_mkdir(const char *path) {
 #ifdef _WIN32

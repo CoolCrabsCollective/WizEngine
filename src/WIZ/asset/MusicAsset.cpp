@@ -2,7 +2,7 @@
 // Created by Alexander Winter on 2022-02-11.
 //
 
-#include "asset/MusicAsset.h"
+#include "WIZ/asset/MusicAsset.h"
 
 
 MusicAsset::MusicAsset(const std::string& path)
