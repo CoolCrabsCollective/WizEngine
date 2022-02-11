@@ -31,13 +31,17 @@ std::shared_ptr<wiz::Screen> wiz::Game::getScreen() const {
 }
 
 void wiz::Game::setScreen(std::shared_ptr<wiz::Screen> screen) {
-	if(this->currentScreen != nullptr)
+	if(this->currentScreen != nullptr) {
+		this->logger->info("Hiding screen " + this->currentScreen->getName());
 		this->currentScreen->hide();
+	}
 
 	this->currentScreen = std::move(screen);
 
-	if(this->currentScreen != nullptr)
+	if(this->currentScreen != nullptr) {
+		this->logger->info("Showing screen " + this->currentScreen->getName());
 		this->currentScreen->show();
+	}
 }
 
 void wiz::Game::setScreen(wiz::Screen* screen) {
