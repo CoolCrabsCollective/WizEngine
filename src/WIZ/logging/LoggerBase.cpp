@@ -4,15 +4,15 @@
 
 #include <WIZ/logging/LoggerBase.h>
 
-LoggerBase::LoggerBase(LogLevel logLevel) : logLevel(logLevel) {
+wiz::LoggerBase::LoggerBase(LogLevel logLevel) : logLevel(logLevel) {
 
 }
 
-LogLevel LoggerBase::getLogLevel() const {
+wiz::LogLevel wiz::LoggerBase::getLogLevel() const {
     return logLevel;
 }
 
-void LoggerBase::setLogLevel(LogLevel level) {
+void wiz::LoggerBase::setLogLevel(LogLevel level) {
     this->logLevel = level;
 }
 

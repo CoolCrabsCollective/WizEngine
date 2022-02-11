@@ -7,11 +7,15 @@
 
 #include "Logger.h"
 
+namespace wiz {
+	class LoggerBase;
+}
+
 /**
  * Base class for logger that implements storage for the log level without
  * specifying the way logging happens
  */
-class LoggerBase : public Logger {
+class wiz::LoggerBase : public wiz::Logger {
 protected:
     LogLevel logLevel;
 

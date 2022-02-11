@@ -7,10 +7,10 @@
 #include <utility>
 #include <stdexcept>
 
-TextureAsset::TextureAsset(std::string path)
+wiz::TextureAsset::TextureAsset(std::string path)
     : SinglePathAsset(std::move(path)) {}
 
-void* TextureAsset::load() const {
+void* wiz::TextureAsset::load() const {
     auto* texture = new sf::Texture();
 
     if(!texture->loadFromFile(path))

@@ -9,7 +9,11 @@
 #include "SinglePathAsset.h"
 #include "SFML/Audio/SoundBuffer.hpp"
 
-class SoundAsset : public SinglePathAsset<sf::SoundBuffer> {
+namespace wiz {
+	class SoundAsset;
+}
+
+class wiz::SoundAsset : public wiz::SinglePathAsset<sf::SoundBuffer> {
 public:
     SoundAsset(const std::string& path);
 

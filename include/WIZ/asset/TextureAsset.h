@@ -10,7 +10,11 @@
 #include "SinglePathAsset.h"
 #include "SFML/Graphics/Texture.hpp"
 
-class TextureAsset : public SinglePathAsset<sf::Texture> {
+namespace wiz {
+	class TextureAsset;
+}
+
+class wiz::TextureAsset : public wiz::SinglePathAsset<sf::Texture> {
 public:
     TextureAsset(std::string path);
 

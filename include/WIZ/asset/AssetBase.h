@@ -8,7 +8,11 @@
 
 #include <string>
 
-class AssetBase {
+namespace wiz {
+	class AssetBase;
+}
+
+class wiz::AssetBase {
 public:
     virtual ~AssetBase() = default;
 

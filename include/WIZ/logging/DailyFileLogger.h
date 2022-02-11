@@ -9,11 +9,15 @@
 #include <fstream>
 #include "LoggerBase.h"
 
+namespace wiz {
+	class DailyFileLogger;
+}
+
 /**
  * Logger that logs its message into a specific daily date named file in a
  * specified folder
  */
-class DailyFileLogger : public LoggerBase {
+class wiz::DailyFileLogger : public wiz::LoggerBase {
     const std::string directory;
     mutable std::ofstream file;
     mutable std::string curFile;

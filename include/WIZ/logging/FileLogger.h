@@ -8,10 +8,14 @@
 #include <fstream>
 #include "LoggerBase.h"
 
+namespace wiz {
+	class FileLogger;
+}
+
 /**
  * Simple Logger implementation that writes its log to a single specified file
  */
-class FileLogger : public LoggerBase {
+class wiz::FileLogger : public wiz::LoggerBase {
 private:
     mutable std::ofstream filePointer;
 

@@ -9,8 +9,13 @@
 #include <utility>
 #include "Asset.h"
 
+namespace wiz {
+	template <typename T>
+	class SinglePathAsset;
+}
+
 template <typename T>
-class SinglePathAsset : public Asset<T> {
+class wiz::SinglePathAsset : public wiz::Asset<T> {
 protected:
     const std::string path;
 public:
@@ -21,11 +26,11 @@ public:
 };
 
 template<typename T>
-SinglePathAsset<T>::SinglePathAsset(std::string path)
+wiz::SinglePathAsset<T>::SinglePathAsset(std::string path)
     : path(std::move(path)) {}
 
 template<typename T>
-const std::string& SinglePathAsset<T>::getName() const {
+const std::string& wiz::SinglePathAsset<T>::getName() const {
     return path;
 }
 

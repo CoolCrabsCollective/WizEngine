@@ -7,10 +7,14 @@
 
 #include "LoggerBase.h"
 
+namespace wiz {
+	class StdOutLogger;
+}
+
 /**
  * Simple logger that outputs its log to STDOUT
  */
-class StdOutLogger : public LoggerBase {
+class wiz::StdOutLogger : public wiz::LoggerBase {
     bool useStderr = false;
 
 public:

@@ -12,13 +12,13 @@ int internal_mkdir(const char *path) {
 #endif
 }
 
-bool directory_exists(const char* directory) {
+bool wiz::directory_exists(const char* directory) {
     struct stat st;
     stat(directory, &st);
     return st.st_mode & S_IFDIR;
 }
 
-int ensure_directory(const char* path) {
+int wiz::ensure_directory(const char* path) {
     std::string current_level;
     std::string level;
     std::stringstream ss(path);
@@ -37,10 +37,10 @@ int ensure_directory(const char* path) {
     return 0;
 }
 
-bool directory_exists(const std::string& directory) {
+bool wiz::directory_exists(const std::string& directory) {
     return directory_exists(directory.c_str());
 }
 
-int ensure_directory(const std::string& path) {
+int wiz::ensure_directory(const std::string& path) {
     return ensure_directory(path.c_str());
 }

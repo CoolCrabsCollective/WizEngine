@@ -9,7 +9,11 @@
 #include "SFML/Graphics/Font.hpp"
 #include "SinglePathAsset.h"
 
-class FontAsset : public SinglePathAsset<sf::Font> {
+namespace wiz {
+	class FontAsset;
+}
+
+class wiz::FontAsset : public SinglePathAsset<sf::Font> {
 public:
     FontAsset(const std::string& path);
 

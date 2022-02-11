@@ -10,36 +10,36 @@
 #include <WIZ/logging/DailyFileLogger.h>
 
 
-DailyFileLogger::DailyFileLogger(std::string directory, LogLevel level)
+wiz::DailyFileLogger::DailyFileLogger(std::string directory, LogLevel level)
 : LoggerBase(level), directory(std::move(directory) + (ends_with(directory, "/") ? "" : "/")) {
 
 }
 
-DailyFileLogger::~DailyFileLogger() {
+wiz::DailyFileLogger::~DailyFileLogger() {
     file.close();
 }
 
-void DailyFileLogger::debug(const std::string& message) const {
+void wiz::DailyFileLogger::debug(const std::string& message) const {
     if(logLevel <= DEBUG)
         getCurrentFile() << message << std::endl;
 }
 
-void DailyFileLogger::info(const std::string& message) const {
+void wiz::DailyFileLogger::info(const std::string& message) const {
     if(logLevel <= INFO)
         getCurrentFile() << message << std::endl;
 }
 
-void DailyFileLogger::warning(const std::string& message) const {
+void wiz::DailyFileLogger::warning(const std::string& message) const {
     if(logLevel <= WARNING)
         getCurrentFile() << message << std::endl;
 }
 
-void DailyFileLogger::error(const std::string& message) const {
+void wiz::DailyFileLogger::error(const std::string& message) const {
     if(logLevel <= ERROR)
         getCurrentFile() << message << std::endl;
 }
 
-std::ofstream& DailyFileLogger::getCurrentFile() const {
+std::ofstream& wiz::DailyFileLogger::getCurrentFile() const {
     std::string presentFile = getCurrentFileName();
     if(presentFile != curFile)
     {
@@ -59,7 +59,7 @@ std::ofstream& DailyFileLogger::getCurrentFile() const {
     return file;
 }
 
-std::string DailyFileLogger::getCurrentFileName() {
+std::string wiz::DailyFileLogger::getCurrentFileName() {
     auto t = std::time(nullptr);
     auto tm = *std::localtime(&t);
 

@@ -7,13 +7,17 @@
 
 #include <string>
 
-enum LogLevel { DEBUG, INFO, WARNING, ERROR, NONE };
+namespace wiz {
+	class Logger;
+
+	enum LogLevel { DEBUG, INFO, WARNING, ERROR, NONE };
+}
 
 /**
  * Abstract definition of a logger for logging purposes. Provides an interface
  * for logging independent of implementation.
  */
-class Logger {
+class wiz::Logger {
 public:
     virtual ~Logger() = default;
 

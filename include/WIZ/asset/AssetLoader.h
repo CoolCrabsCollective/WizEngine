@@ -13,7 +13,11 @@
 #include <stdexcept>
 #include "Asset.h"
 
-class AssetLoader {
+namespace wiz {
+	class AssetLoader;
+}
+
+class wiz::AssetLoader {
     const Logger& logger;
 
     mutable std::map<const AssetBase*, void*> map;

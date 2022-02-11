@@ -5,10 +5,10 @@
 #include <stdexcept>
 #include "WIZ/asset/FontAsset.h"
 
-FontAsset::FontAsset(const std::string& path)
+wiz::FontAsset::FontAsset(const std::string& path)
     : SinglePathAsset(path) {}
 
-void* FontAsset::load() const {
+void* wiz::FontAsset::load() const {
     auto* font = new sf::Font();
 
     if(!font->loadFromFile(path))

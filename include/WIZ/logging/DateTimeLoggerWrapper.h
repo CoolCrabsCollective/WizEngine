@@ -9,11 +9,15 @@
 #include "Logger.h"
 #include <memory>
 
+namespace wiz {
+	class DateTimeLoggerWrapper;
+}
+
 /**
  * Logger which wraps another logger to prepend to its message the current date
  * and time
  */
-class DateTimeLoggerWrapper : public Logger {
+class wiz::DateTimeLoggerWrapper : public wiz::Logger {
     std::shared_ptr<Logger> logger;
     const char* format;
 

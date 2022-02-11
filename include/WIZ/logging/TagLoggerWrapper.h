@@ -9,11 +9,15 @@
 #include "Logger.h"
 #include <memory>
 
+namespace wiz {
+	class TagLoggerWrapper;
+}
+
 /**
  * Logger which wraps another logger to prepend to its message the LogLevel of
  * its messages
  */
-class TagLoggerWrapper : public Logger {
+class wiz::TagLoggerWrapper : public wiz::Logger {
     std::shared_ptr<Logger> logger;
 
 public:

@@ -5,10 +5,10 @@
 #include <stdexcept>
 #include "WIZ/asset/SoundAsset.h"
 
-SoundAsset::SoundAsset(const std::string& path)
+wiz::SoundAsset::SoundAsset(const std::string& path)
     : SinglePathAsset(path) {}
 
-void* SoundAsset::load() const {
+void* wiz::SoundAsset::load() const {
     auto* sound = new sf::SoundBuffer();
 
     if(!sound->loadFromFile(path))

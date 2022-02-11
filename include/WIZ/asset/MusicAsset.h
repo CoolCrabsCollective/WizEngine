@@ -9,7 +9,11 @@
 #include "SFML/Audio/Music.hpp"
 #include "SinglePathAsset.h"
 
-class MusicAsset : public SinglePathAsset<sf::Music> {
+namespace wiz {
+	class MusicAsset;
+}
+
+class wiz::MusicAsset : public wiz::SinglePathAsset<sf::Music> {
 public:
     MusicAsset(const std::string& path);
 

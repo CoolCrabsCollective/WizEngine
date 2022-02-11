@@ -7,8 +7,13 @@
 
 #include "AssetBase.h"
 
+namespace wiz {
+	template <typename T>
+	class Asset;
+}
+
 template <typename T>
-class Asset : public AssetBase {
+class wiz::Asset : public wiz::AssetBase {
 public:
     void dispose(void* data) const override {
         delete (T*)data;

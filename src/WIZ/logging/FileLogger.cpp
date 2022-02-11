@@ -4,30 +4,30 @@
 
 #include <WIZ/logging/FileLogger.h>
 
-FileLogger::FileLogger(const std::string& filePath, LogLevel logLevel) : LoggerBase(logLevel) {
+wiz::FileLogger::FileLogger(const std::string& filePath, LogLevel logLevel) : LoggerBase(logLevel) {
     filePointer.open(filePath, std::ios::out | std::ios::app);
 }
 
-FileLogger::~FileLogger() {
+wiz::FileLogger::~FileLogger() {
     filePointer.close();
 }
 
-void FileLogger::debug(const std::string& message) const {
+void wiz::FileLogger::debug(const std::string& message) const {
     if(logLevel <= DEBUG)
         filePointer << message << std::endl;
 }
 
-void FileLogger::info(const std::string& message) const {
+void wiz::FileLogger::info(const std::string& message) const {
     if(logLevel <= INFO)
         filePointer  << message << std::endl;
 }
 
-void FileLogger::warning(const std::string& message) const {
+void wiz::FileLogger::warning(const std::string& message) const {
     if(logLevel <= WARNING)
         filePointer << message << std::endl;
 }
 
-void FileLogger::error(const std::string& message) const {
+void wiz::FileLogger::error(const std::string& message) const {
     if(logLevel <= ERROR)
         filePointer  << message << std::endl;
 }

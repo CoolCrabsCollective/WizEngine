@@ -5,10 +5,10 @@
 #include "WIZ/asset/MusicAsset.h"
 
 
-MusicAsset::MusicAsset(const std::string& path)
+wiz::MusicAsset::MusicAsset(const std::string& path)
         : SinglePathAsset(path) {}
 
-void* MusicAsset::load() const {
+void* wiz::MusicAsset::load() const {
     auto* music = new sf::Music();
 
     if(!music->openFromFile(path))

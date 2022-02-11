@@ -6,23 +6,23 @@
 #include "WIZ/asset/AssetLoader.h"
 #include "SFML/Graphics/Texture.hpp"
 
-AssetLoader::AssetLoader(const Logger& logger)
+wiz::AssetLoader::AssetLoader(const Logger& logger)
     : logger(logger) {}
 
-AssetLoader::~AssetLoader() {
+wiz::AssetLoader::~AssetLoader() {
 
     for(auto const& x : map) {
         x.first->dispose(x.second);
     }
 }
 
-void AssetLoader::load(const AssetBase& asset) {
+void wiz::AssetLoader::load(const AssetBase& asset) {
     map[&asset] = nullptr;
     logger.info("[AssetLoader] Added " + asset.getName() + " to loading queue");
 }
 
 
-void AssetLoader::update(std::chrono::duration<float, std::milli> duration) {
+void wiz::AssetLoader::update(std::chrono::duration<float, std::milli> duration) {
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for(auto const& x : map) {
@@ -39,7 +39,7 @@ void AssetLoader::update(std::chrono::duration<float, std::milli> duration) {
     }
 }
 
-void AssetLoader::finishLoading(const AssetBase& asset) {
+void wiz::AssetLoader::finishLoading(const AssetBase& asset) {
     if(isLoaded(asset))
         return;
 
@@ -57,18 +57,18 @@ void AssetLoader::finishLoading(const AssetBase& asset) {
     }
 }
 
-bool AssetLoader::isLoaded(const AssetBase& asset) const {
+bool wiz::AssetLoader::isLoaded(const AssetBase& asset) const {
     return map[&asset] != nullptr;
 }
 
-float AssetLoader::getProgress() const {
+float wiz::AssetLoader::getProgress() const {
     return static_cast<float>(getLoaded()) / static_cast<float>(getTotal());
 }
 
-uint32_t AssetLoader::getLoaded() const {
+uint32_t wiz::AssetLoader::getLoaded() const {
     return loaded;
 }
 
-uint32_t AssetLoader::getTotal() const {
+uint32_t wiz::AssetLoader::getTotal() const {
     return map.size();
 }

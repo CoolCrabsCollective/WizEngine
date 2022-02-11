@@ -11,11 +11,15 @@
 #include <list>
 #include "Logger.h"
 
+namespace wiz {
+	class MultiLogger;
+}
+
 /**
  * Logger implementation that delegates its logging to a list of logger for
  * simultaneous logging on multiple logger implementations
  */
-class MultiLogger : public Logger {
+class wiz::MultiLogger : public wiz::Logger {
     std::vector<std::shared_ptr<Logger>> loggers;
 
 public:
