@@ -1,2 +1,2 @@
 # WizEngine
-SFML game engine
+SFML game engine developed by the WWW team
