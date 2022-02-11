@@ -58,7 +58,7 @@ include(FetchContent)
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     FetchContent_Declare(
             sfml
-            URL https://github.com/WinterAlexander/SFML-switch/archive/2ed34877d299a3fa11823da333152759838a60c4.zip
+            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/5c5d0275762432dcc5354a0ec4cf8404597d1b05.zip
     )
 else()
     FetchContent_Declare(
