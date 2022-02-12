@@ -3,6 +3,7 @@
 //
 
 #include "WIZ/game/Game.h"
+#include "WIZ/game/Screen.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "WIZ/logging/Logger.h"
 
