@@ -21,7 +21,7 @@ public:
 	virtual ~Screen() = default;
 
 	virtual void tick(float delta) = 0;
-	virtual void render(const sf::RenderTarget& target) = 0;
+	virtual void render(sf::RenderTarget& target) = 0;
 
 	virtual void show() = 0;
 	virtual void hide() = 0;
