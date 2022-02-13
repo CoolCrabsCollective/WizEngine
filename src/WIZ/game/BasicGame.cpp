@@ -164,6 +164,7 @@ void wiz::BasicGame::update() {
 		runnables.clear();
 
 		currentScreen->render(*window);
+		window->display();
 	} else {
 		window->clear();
 		window->display();
