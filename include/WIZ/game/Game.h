@@ -8,6 +8,9 @@
 #include <memory>
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "WIZ/logging/Logger.h"
+#include "WIZ/asset/AssetLoader.h"
+#include "InputListener.h"
+#include "WindowListener.h"
 
 namespace wiz {
 	class Game;
@@ -15,20 +18,31 @@ namespace wiz {
 }
 
 class wiz::Game {
-	const std::shared_ptr<sf::RenderWindow> window;
-	const std::shared_ptr<Logger> logger;
-
-	std::shared_ptr<Screen> currentScreen = nullptr;
 public:
-	Game(sf::RenderWindow* window, Logger* logger);
-	Game(std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<Logger> logger);
 	virtual ~Game() = default;
 
-	void update();
+	virtual void update() = 0;
 
-	std::shared_ptr<Screen> getScreen() const;
-	void setScreen(std::shared_ptr<Screen> screen);
-	void setScreen(Screen* screen);
+	virtual Screen& getScreen() = 0;
+	virtual const Screen& getScreen() const = 0;
+
+	virtual void setScreen(std::shared_ptr<Screen> screen) = 0;
+	virtual void setScreen(Screen* screen) = 0;
+
+	virtual Logger& getLogger() = 0;
+	virtual const Logger& getLogger() const = 0;
+
+	virtual sf::RenderWindow& getWindow() = 0;
+	virtual const sf::RenderWindow& getWindow() const = 0;
+
+	virtual AssetLoader& getAssets() = 0;
+	virtual const AssetLoader& getAssets() const = 0;
+
+	virtual void addInputListener(InputListener* listener) = 0;
+	virtual void removeInputListener(InputListener* listener) = 0;
+
+	virtual void addWindowListener(WindowListener* listener) = 0;
+	virtual void removeWindowListener(WindowListener* listener) = 0;
 };
 
 
