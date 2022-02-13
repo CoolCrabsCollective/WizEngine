@@ -29,6 +29,15 @@ public:
 	const Game& getGame() const;
 	Game& getGame();
 
+	Logger& getLogger();
+	const Logger& getLogger() const;
+
+	AssetLoader& getAssets();
+	const AssetLoader& getAssets() const;
+
+	sf::RenderWindow& getWindow();
+	const sf::RenderWindow& getWindow() const;
+
 	virtual const std::string& getName() const = 0;
 };
 

@@ -14,3 +14,27 @@ const wiz::Game& wiz::Screen::getGame() const {
 wiz::Game& wiz::Screen::getGame() {
 	return game;
 }
+
+wiz::Logger& wiz::Screen::getLogger() {
+	return getGame().getLogger();
+}
+
+const wiz::Logger& wiz::Screen::getLogger() const {
+	return getGame().getLogger();
+}
+
+wiz::AssetLoader& wiz::Screen::getAssets() {
+	return getGame().getAssets();
+}
+
+const wiz::AssetLoader& wiz::Screen::getAssets() const {
+	return getGame().getAssets();
+}
+
+sf::RenderWindow& wiz::Screen::getWindow() {
+	return getGame().getWindow();
+}
+
+const sf::RenderWindow& wiz::Screen::getWindow() const {
+	return getGame().getWindow();
+}
