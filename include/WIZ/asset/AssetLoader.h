@@ -11,6 +11,7 @@
 #include <map>
 #include <memory>
 #include <stdexcept>
+#include <vector>
 #include "Asset.h"
 
 namespace wiz {
@@ -32,9 +33,13 @@ public:
 
     void load(const AssetBase& asset);
 
+	void loadAll(const std::vector<const AssetBase*>& assets);
+
     void update(std::chrono::duration<float, std::milli> duration);
 
     void finishLoading(const AssetBase& asset);
+
+	void finishLoadingAll();
 
     template<class T>
     T* get(const Asset<T>& asset) const {

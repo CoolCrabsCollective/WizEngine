@@ -21,6 +21,10 @@ void wiz::AssetLoader::load(const AssetBase& asset) {
     logger.info("[AssetLoader] Added " + asset.getName() + " to loading queue");
 }
 
+void wiz::AssetLoader::loadAll(const std::vector<const AssetBase*>& assets) {
+	for(const AssetBase* asset : assets)
+		load(*asset);
+}
 
 void wiz::AssetLoader::update(std::chrono::duration<float, std::milli> duration) {
 
@@ -55,6 +59,15 @@ void wiz::AssetLoader::finishLoading(const AssetBase& asset) {
     {
         logger.error("[AssetLoader] Failed to load asset '" + asset.getName() + "', reason: " + ex.what());
     }
+}
+
+void wiz::AssetLoader::finishLoadingAll() {
+	for(auto const& x : map) {
+		if(x.second != nullptr)
+			continue;
+
+		finishLoading(*x.first);
+	}
 }
 
 bool wiz::AssetLoader::isLoaded(const AssetBase& asset) const {
