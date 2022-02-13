@@ -13,10 +13,10 @@ namespace wiz {
 }
 
 class wiz::Screen {
-	const Game& game;
+	Game& game;
 
 public:
-	explicit Screen(const Game& game);
+	explicit Screen(Game& game);
 
 	virtual ~Screen() = default;
 
@@ -26,8 +26,10 @@ public:
 	virtual void show() = 0;
 	virtual void hide() = 0;
 
-	virtual const std::string& getName() const = 0;
 	const Game& getGame() const;
+	Game& getGame();
+
+	virtual const std::string& getName() const = 0;
 };
 
 
