@@ -54,7 +54,7 @@ void wiz::AssetLoader::finishLoading(const AssetBase& asset) {
         void* pointer = asset.load();
 
         map[&asset] = pointer;
-        logger.error("[AssetLoader] Loaded asset " + asset.getName());
+        logger.info("[AssetLoader] Loaded asset " + asset.getName());
         loaded++;
     }
     catch(std::exception& ex)
