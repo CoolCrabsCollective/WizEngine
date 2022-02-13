@@ -11,7 +11,11 @@ wiz::FontAsset::FontAsset(const std::string& path)
 void* wiz::FontAsset::load() const {
     auto* font = new sf::Font();
 
-    if(!font->loadFromFile(path))
+#ifdef OS_SWITCH
+    if(!font->loadFromFile("romfs:/" + path))
+#else
+	if(!font->loadFromFile("res/" + path))
+#endif
         throw std::runtime_error("Failed to load font " + path);
 
     return font;

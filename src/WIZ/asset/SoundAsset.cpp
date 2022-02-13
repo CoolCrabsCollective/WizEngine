@@ -11,7 +11,11 @@ wiz::SoundAsset::SoundAsset(const std::string& path)
 void* wiz::SoundAsset::load() const {
     auto* sound = new sf::SoundBuffer();
 
-    if(!sound->loadFromFile(path))
+#ifdef OS_SWITCH
+	if(!sound->loadFromFile("romfs:/" + path))
+#else
+	if(!sound->loadFromFile("res/" + path))
+#endif
         throw std::runtime_error("Failed to load sound " + path);
 
     return sound;
