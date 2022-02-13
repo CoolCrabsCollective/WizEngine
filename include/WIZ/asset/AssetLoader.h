@@ -35,7 +35,7 @@ public:
 
 	void loadAll(const std::vector<const AssetBase*>& assets);
 
-    void update(std::chrono::duration<float, std::milli> duration);
+	void update(float millis);
 
     void finishLoading(const AssetBase& asset);
 

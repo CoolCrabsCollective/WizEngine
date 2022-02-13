@@ -26,21 +26,23 @@ void wiz::AssetLoader::loadAll(const std::vector<const AssetBase*>& assets) {
 		load(*asset);
 }
 
-void wiz::AssetLoader::update(std::chrono::duration<float, std::milli> duration) {
+void wiz::AssetLoader::update(float millis) {
 
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    for(auto const& x : map) {
+	auto duration = std::chrono::duration<float, std::milli>(millis);
 
-        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	for(auto const& x : map) {
 
-        if(std::chrono::duration_cast<std::chrono::milliseconds>(now - begin) > duration)
-            break;
+		std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
 
-        if(x.second != nullptr)
-            continue;
+		if(std::chrono::duration_cast<std::chrono::milliseconds>(now - begin) > duration)
+			break;
 
-        finishLoading(*x.first);
-    }
+		if(x.second != nullptr)
+			continue;
+
+		finishLoading(*x.first);
+	}
 }
 
 void wiz::AssetLoader::finishLoading(const AssetBase& asset) {
