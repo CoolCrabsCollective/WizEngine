@@ -18,6 +18,9 @@ class wiz::Screen {
 public:
 	explicit Screen(Game& game);
 
+	Screen(const Screen&) = delete;
+	Screen& operator=(const Screen&) = delete;
+
 	virtual ~Screen() = default;
 
 	virtual void tick(float delta) = 0;
