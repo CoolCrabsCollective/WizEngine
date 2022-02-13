@@ -74,6 +74,10 @@ bool wiz::AssetLoader::isLoaded(const AssetBase& asset) const {
     return map[&asset] != nullptr;
 }
 
+bool wiz::AssetLoader::isAllLoaded() const {
+	return getLoaded() == getTotal();
+}
+
 float wiz::AssetLoader::getProgress() const {
     return static_cast<float>(getLoaded()) / static_cast<float>(getTotal());
 }

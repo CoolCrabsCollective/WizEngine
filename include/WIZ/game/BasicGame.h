@@ -54,6 +54,8 @@ public:
 
 	void addWindowListener(WindowListener* listener) override;
 	void removeWindowListener(WindowListener* listener) override;
+
+	void postRunnable(void (*runnable)());
 };
 
 

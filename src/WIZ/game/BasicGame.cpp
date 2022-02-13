@@ -236,3 +236,7 @@ void wiz::BasicGame::addWindowListener(wiz::WindowListener* listener) {
 void wiz::BasicGame::removeWindowListener(wiz::WindowListener* listener) {
 	windowListeners.erase(listener);
 }
+
+void wiz::BasicGame::postRunnable(void (*runnable)()) {
+	runnables.push_back(runnable);
+}

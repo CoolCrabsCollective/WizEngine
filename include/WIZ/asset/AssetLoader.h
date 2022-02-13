@@ -53,6 +53,8 @@ public:
 
     bool isLoaded(const AssetBase& asset) const;
 
+	bool isAllLoaded() const;
+
     float getProgress() const;
 
     uint32_t getLoaded() const;

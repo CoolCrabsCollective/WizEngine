@@ -15,6 +15,7 @@ elseif(UNIX)
     add_compile_definitions(OS_UNIX)
 elseif(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     add_compile_definitions(OS_SWITCH)
+    set(CMAKE_USER_MAKE_RULES_OVERRIDE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/CompilerOptionsOverride.cmake")
 endif()
 
 #
@@ -80,6 +81,10 @@ find_package(Threads REQUIRED)
 
 # include and source files
 include_directories(include ${SFML_SOURCE_DIR}/include)
+
+if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
+    include_directories(${LIBNX_INCLUDE_DIR})
+endif()
 
 file(GLOB SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/src/*.cpp
