@@ -28,7 +28,7 @@ set(CMAKE_CXX_STANDARD 20)
 # The following if-else chain makes the different platform output at different
 # paths:
 #
-# out/
+# bin/
 #   windows64/
 #   windows32/
 #   mac/
@@ -88,10 +88,13 @@ endif()
 
 file(GLOB SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/src/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/*.inl
         ${PROJECT_SOURCE_DIR}/include/*.h
         ${PROJECT_SOURCE_DIR}/src/*/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/*/*.inl
         ${PROJECT_SOURCE_DIR}/include/*/*.h
         ${PROJECT_SOURCE_DIR}/src/*/*/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/*/*/*.inl
         ${PROJECT_SOURCE_DIR}/include/*/*/*.h)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
