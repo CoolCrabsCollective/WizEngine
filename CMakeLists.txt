@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.7)
 project(WizEngine)
 
+set(SFML_COMMIT ef8d6ee7f710fff9bdaf69c6bb3660fa4d3a8958)
+set(SFML_SWITCH_COMMIT 5c5d0275762432dcc5354a0ec4cf8404597d1b05)
+
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     # Not for windows because windres.exe doesn't support those
     add_definitions(-Wall -ansi -Wno-deprecated -pthread -Wpedantic)
@@ -59,12 +62,12 @@ include(FetchContent)
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     FetchContent_Declare(
             sfml
-            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/5c5d0275762432dcc5354a0ec4cf8404597d1b05.zip
+            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/${SFML_SWITCH_COMMIT}.zip
     )
 else()
     FetchContent_Declare(
             sfml
-            URL https://github.com/SFML/SFML/archive/ef8d6ee7f710fff9bdaf69c6bb3660fa4d3a8958.zip
+            URL https://github.com/SFML/SFML/archive/${SFML_COMMIT}.zip
     )
 endif()
 FetchContent_MakeAvailable(sfml)
@@ -88,13 +91,16 @@ endif()
 
 file(GLOB SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/src/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/*.inl
+        ${PROJECT_SOURCE_DIR}/include/*.inl
         ${PROJECT_SOURCE_DIR}/include/*.h
+        ${PROJECT_SOURCE_DIR}/include/*.hpp
         ${PROJECT_SOURCE_DIR}/src/*/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/*/*.inl
+        ${PROJECT_SOURCE_DIR}/include/*/*.inl
         ${PROJECT_SOURCE_DIR}/include/*/*.h
+        ${PROJECT_SOURCE_DIR}/include/*/*.hpp
         ${PROJECT_SOURCE_DIR}/src/*/*/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/*/*/*.inl
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.h)
+        ${PROJECT_SOURCE_DIR}/include/*/*/*.inl
+        ${PROJECT_SOURCE_DIR}/include/*/*/*.h
+        ${PROJECT_SOURCE_DIR}/include/*/*/*.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})

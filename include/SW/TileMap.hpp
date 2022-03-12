@@ -164,5 +164,5 @@ private:
 };
 
 } // namespace selbaward
-#include "../../src/SW/TileMap.inl"
+#include "TileMap.inl"
 #endif // SELBAWARD_TILEMAP_HPP
