@@ -141,7 +141,6 @@ namespace selbaward
 {
 
 NinePatch::NinePatch()
-	: m_primitiveType{ sf::PrimitiveType::Triangles }
 	, m_vertices(9 * 6, sf::Vertex({ 0.f, 0.f }))
 	, m_texture{ nullptr }
 	, m_trimmedSize({ 0.f, 0.f })
@@ -241,7 +240,7 @@ void NinePatch::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.texture = m_texture;
 	states.transform *= getTransform();
-	target.draw(&m_vertices.front(), 6 * 9, m_primitiveType, states);
+	target.draw(&m_vertices.front(), 6 * 9, sf::PrimitiveType::Triangles, states);
 }
 
 void NinePatch::priv_updateVertices()
