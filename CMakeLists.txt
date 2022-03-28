@@ -104,3 +104,22 @@ file(GLOB SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/include/*/*/*.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
+
+
+
+FetchContent_Declare(googletest
+        # Version 1.11.0
+        URL https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip)
+
+set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
+add_executable(${PROJECT_NAME}_tests ${TEST_SRC_FILES})
+
+target_link_libraries(${PROJECT_NAME}_tests gtest_main ${PROJECT_NAME})
+
+include(GoogleTest)
+gtest_discover_tests(${PROJECT_NAME}_tests)
