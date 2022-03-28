@@ -31,6 +31,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "SW/NinePatch.hpp"
+#include "SFML/Graphics/Image.hpp"
 
 namespace
 {
@@ -141,7 +142,7 @@ namespace selbaward
 {
 
 NinePatch::NinePatch()
-	, m_vertices(9 * 6, sf::Vertex({ 0.f, 0.f }))
+	: m_vertices(9 * 6, sf::Vertex({ 0.f, 0.f }))
 	, m_texture{ nullptr }
 	, m_trimmedSize({ 0.f, 0.f })
 	, m_size({ 0.f, 0.f })
@@ -236,10 +237,11 @@ bool NinePatch::isPointInsideTransformedContentArea(const sf::Vector2f point) co
 
 // PRIVATE
 
-void NinePatch::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void NinePatch::draw(sf::RenderTarget& target, const sf::RenderStates& states) const
 {
-	states.texture = m_texture;
-	states.transform *= getTransform();
+	sf::RenderStates states2 = states;
+	states2.texture = m_texture;
+	states2.transform *= getTransform();
 	target.draw(&m_vertices.front(), 6 * 9, sf::PrimitiveType::Triangles, states);
 }
 

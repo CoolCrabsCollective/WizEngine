@@ -42,6 +42,7 @@ namespace selbaward
 class Spline : public sf::Drawable
 {
 public:
+
 	enum class ThickCornerType
 	{
 		Bevel,
@@ -187,12 +188,6 @@ public:
 	float getInterpolatedPositionThicknessCorrectionScale(unsigned int interpolationOffset, unsigned int index = 0u) const; // index is control vertex offset
 	unsigned int getInterpolatedPositionCount() const;
 
-
-
-
-
-
-
 private:
 	bool m_throwExceptions;
 	bool m_isClosed;
@@ -223,7 +218,7 @@ private:
 	bool m_lockHandleMirror;
 	bool m_lockHandleAngle;
 
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	void draw(sf::RenderTarget& target, const sf::RenderStates& states) const override;
 	bool priv_isValidVertexIndex(unsigned int vertexIndex) const;
 	bool priv_testVertexIndex(unsigned int vertexIndex, const std::string& exceptionMessage) const;
 	bool priv_isThick() const;

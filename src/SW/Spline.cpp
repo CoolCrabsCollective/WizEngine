@@ -838,9 +838,11 @@ float Spline::getInterpolatedPositionThicknessCorrectionScale(const unsigned int
 
 // PRIVATE
 
-void Spline::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Spline::draw(sf::RenderTarget& target, const sf::RenderStates& statesRef) const
 {
+	sf::RenderStates states = statesRef;
 	states.texture = nullptr;
+
 	if (m_outputVertices.size() > 0)
 		target.draw(m_outputVertices.data(), m_outputVertices.size(), (priv_isThick() ? thickPrimitiveType : m_primitiveType), states);
 	if (m_showHandles && m_handlesVertices.size() > 1)
