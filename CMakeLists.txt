@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 project(WizEngine)
 
 set(SFML_COMMIT 8f6903d00853fd3db395a557733ae65a14f37c01)
-set(SFML_SWITCH_COMMIT 5c5d0275762432dcc5354a0ec4cf8404597d1b05)
+set(SFML_SWITCH_COMMIT f68da1dd1276d1d6392a0208c4d00e3c3331c962)
 
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     # Not for windows because windres.exe doesn't support those
