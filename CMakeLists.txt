@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.7)
 project(WizEngine)
 
+set(SFML_COMMIT 8f6903d00853fd3db395a557733ae65a14f37c01)
+set(SFML_SWITCH_COMMIT master)
+
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     # Not for windows because windres.exe doesn't support those
     add_definitions(-Wall -ansi -Wno-deprecated -pthread -Wpedantic)
@@ -28,7 +31,7 @@ set(CMAKE_CXX_STANDARD 20)
 # The following if-else chain makes the different platform output at different
 # paths:
 #
-# out/
+# bin/
 #   windows64/
 #   windows32/
 #   mac/
@@ -59,12 +62,12 @@ include(FetchContent)
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     FetchContent_Declare(
             sfml
-            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/master.zip
+            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/${SFML_SWITCH_COMMIT}.zip
     )
 else()
     FetchContent_Declare(
             sfml
-            URL https://github.com/SFML/SFML/archive/ef8d6ee7f710fff9bdaf69c6bb3660fa4d3a8958.zip
+            URL https://github.com/SFML/SFML/archive/${SFML_COMMIT}.zip
     )
 endif()
 FetchContent_MakeAvailable(sfml)
@@ -88,10 +91,35 @@ endif()
 
 file(GLOB SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/src/*.cpp
+        ${PROJECT_SOURCE_DIR}/include/*.inl
         ${PROJECT_SOURCE_DIR}/include/*.h
+        ${PROJECT_SOURCE_DIR}/include/*.hpp
         ${PROJECT_SOURCE_DIR}/src/*/*.cpp
+        ${PROJECT_SOURCE_DIR}/include/*/*.inl
         ${PROJECT_SOURCE_DIR}/include/*/*.h
+        ${PROJECT_SOURCE_DIR}/include/*/*.hpp
         ${PROJECT_SOURCE_DIR}/src/*/*/*.cpp
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.h)
+        ${PROJECT_SOURCE_DIR}/include/*/*/*.inl
+        ${PROJECT_SOURCE_DIR}/include/*/*/*.h
+        ${PROJECT_SOURCE_DIR}/include/*/*/*.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
+
+
+
+FetchContent_Declare(googletest
+        # Version 1.11.0
+        URL https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip)
+
+set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
+add_executable(${PROJECT_NAME}_tests ${TEST_SRC_FILES})
+
+target_link_libraries(${PROJECT_NAME}_tests gtest_main ${PROJECT_NAME})
+
+include(GoogleTest)
+gtest_discover_tests(${PROJECT_NAME}_tests)

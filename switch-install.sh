@@ -1,5 +1,6 @@
 #! /bin/bash
 
+set -eu
 cmake -B build-switch -S . -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/DevkitA64Libnx.cmake
 cd build-switch
 make
