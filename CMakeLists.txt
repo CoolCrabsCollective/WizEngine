@@ -60,15 +60,11 @@ endif()
 # Fetches SFML dependency and loads its CMakeLists.txt
 include(FetchContent)
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
-    FetchContent_Declare(
-            sfml
-            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/${SFML_SWITCH_COMMIT}.zip
-    )
+    FetchContent_Declare(sfml
+            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/${SFML_SWITCH_COMMIT}.zip)
 else()
-    FetchContent_Declare(
-            sfml
-            URL https://github.com/SFML/SFML/archive/${SFML_COMMIT}.zip
-    )
+    FetchContent_Declare(sfml
+            URL https://github.com/SFML/SFML/archive/${SFML_COMMIT}.zip)
 endif()
 FetchContent_MakeAvailable(sfml)
 
@@ -105,21 +101,22 @@ file(GLOB SOURCE_FILES
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 
+if(NOT CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
+    FetchContent_Declare(googletest
+            # Version 1.11.0
+            URL https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip)
 
+    set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
 
-FetchContent_Declare(googletest
-        # Version 1.11.0
-        URL https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip)
+    enable_testing()
 
-set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+    file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
+    add_executable(${PROJECT_NAME}_tests ${TEST_SRC_FILES})
 
-enable_testing()
+    target_link_libraries(${PROJECT_NAME}_tests gtest_main ${PROJECT_NAME})
 
-file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
-add_executable(${PROJECT_NAME}_tests ${TEST_SRC_FILES})
+    include(GoogleTest)
+    gtest_discover_tests(${PROJECT_NAME}_tests)
 
-target_link_libraries(${PROJECT_NAME}_tests gtest_main ${PROJECT_NAME})
-
-include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}_tests)
+endif()
