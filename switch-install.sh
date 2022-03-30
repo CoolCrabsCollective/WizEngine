@@ -8,4 +8,4 @@ cd ..
 
 sudo cp bin/switch/libWizEngine.a $DEVKITPRO/portlibs/switch/lib/
 sudo cp -r include/* $DEVKITPRO/portlibs/switch/include/
-#sudo cp -r build-switch/_deps/sfml-src/include/* $DEVKITPRO/portlibs/switch/include/
+sudo cp -r build-switch/_deps/sfml-src/include/* $DEVKITPRO/portlibs/switch/include/
