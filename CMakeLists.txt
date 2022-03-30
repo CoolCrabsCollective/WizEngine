@@ -3,6 +3,8 @@ project(WizEngine)
 
 set(SFML_COMMIT 8f6903d00853fd3db395a557733ae65a14f37c01)
 set(SFML_SWITCH_COMMIT master)
+set(BOX2D_CMAKE_COMMIT master)
+set(GTEST_COMMIT e2239ee6043f73722e7aa812a459f54a28552929) # Version 1.11.0
 
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     # Not for windows because windres.exe doesn't support those
@@ -61,16 +63,25 @@ endif()
 include(FetchContent)
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     FetchContent_Declare(sfml
-            URL https://github.com/WheezyWiseWizards/SFML-switch/archive/${SFML_SWITCH_COMMIT}.zip)
+            GIT_REPOSITORY https://github.com/WheezyWiseWizards/SFML-switch.git
+            GIT_TAG ${SFML_SWITCH_COMMIT})
 else()
     FetchContent_Declare(sfml
-            URL https://github.com/SFML/SFML/archive/${SFML_COMMIT}.zip)
+            GIT_REPOSITORY https://github.com/SFML/SFML.git
+            GIT_TAG ${SFML_COMMIT})
 endif()
 FetchContent_MakeAvailable(sfml)
 
 # this creates the variables SFML_SOURCE_DIR, SFML_BINARY_DIR and SFML_POPULATED
 # then SFML_SOURCE_DIR is used below to include the header files
 FetchContent_GetProperties(SFML)
+
+# Fetches Box2D dependency and loads its CMakeLists.txt
+FetchContent_Declare(Box2D
+        GIT_REPOSITORY https://github.com/WheezyWiseWizards/Box2D-cmake.git
+        GIT_TAG ${BOX2D_CMAKE_COMMIT})
+FetchContent_MakeAvailable(Box2D)
+FetchContent_GetProperties(Box2D)
 
 # Other dependencies
 
@@ -79,7 +90,7 @@ find_package(OpenGL)
 find_package(Threads REQUIRED)
 
 # include and source files
-include_directories(include ${SFML_SOURCE_DIR}/include)
+include_directories(include ${SFML_SOURCE_DIR}/include ${Box2D_SOURCE_DIR}/Box2D/Box2D)
 
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     include_directories(${LIBNX_INCLUDE_DIR})
@@ -103,8 +114,8 @@ add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 
 if(NOT CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     FetchContent_Declare(googletest
-            # Version 1.11.0
-            URL https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip)
+            GIT_REPOSITORY https://github.com/google/googletest.git
+            GIT_TAG ${GTEST_COMMIT})
 
     set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(googletest)
@@ -114,7 +125,10 @@ if(NOT CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
     add_executable(${PROJECT_NAME}_tests ${TEST_SRC_FILES})
 
-    target_link_libraries(${PROJECT_NAME}_tests gtest_main ${PROJECT_NAME})
+    target_link_libraries(${PROJECT_NAME}_tests
+            gtest_main
+            ${PROJECT_NAME}
+            WIZ::Box2D)
 
     include(GoogleTest)
     gtest_discover_tests(${PROJECT_NAME}_tests)
