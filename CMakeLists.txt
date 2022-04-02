@@ -8,7 +8,7 @@ set(GTEST_COMMIT e2239ee6043f73722e7aa812a459f54a28552929) # Version 1.11.0
 
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     # Not for windows because windres.exe doesn't support those
-    add_definitions(-Wall -ansi -Wno-deprecated -pthread -Wpedantic)
+    add_definitions(-frtti -Wall -ansi -Wno-deprecated -pthread -Wpedantic)
 endif()
 
 # applies OS type C++ macro
