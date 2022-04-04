@@ -27,114 +27,123 @@ wiz::BasicGame::BasicGame(std::shared_ptr<sf::RenderWindow> window,
 void wiz::BasicGame::update() {
 	sf::Event event;
 	while(window->pollEvent(event)) {
+
+		tmpInputListeners.clear();
+		for (InputListener* listener : inputListeners)
+			tmpInputListeners.insert(listener);
+
+		tmpWindowListeners.clear();
+		for (WindowListener* listener : windowListeners)
+			tmpWindowListeners.insert(listener);
+
 		switch (event.type) {
 			case sf::Event::Closed:
-				for (WindowListener* listener: windowListeners)
+				for (WindowListener* listener : tmpWindowListeners)
 					listener->windowClosed();
 				break;
 
 			case sf::Event::Resized:
-				for (WindowListener* listener: windowListeners)
+				for (WindowListener* listener : tmpWindowListeners)
 					listener->windowResized(event.size);
 				break;
 
 			case sf::Event::LostFocus:
-				for (WindowListener* listener: windowListeners)
+				for (WindowListener* listener : tmpWindowListeners)
 					listener->windowLostFocus();
 				break;
 
 			case sf::Event::MouseEntered:
-				for (WindowListener* listener: windowListeners)
+				for (WindowListener* listener : tmpWindowListeners)
 					listener->mouseEntered();
 				break;
 
 			case sf::Event::MouseLeft:
-				for (WindowListener* listener: windowListeners)
+				for (WindowListener* listener : tmpWindowListeners)
 					listener->mouseExited();
 				break;
 
 			case sf::Event::GainedFocus:
-				for (WindowListener* listener: windowListeners)
+				for (WindowListener* listener : tmpWindowListeners)
 					listener->windowGainedFocus();
 				break;
 
 			case sf::Event::TextEntered:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->textEntered(event.text);
 				break;
 
 			case sf::Event::KeyPressed:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->keyPressed(event.key);
 				break;
 
 			case sf::Event::KeyReleased:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->keyReleased(event.key);
 				break;
 
 			case sf::Event::MouseWheelScrolled:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->mouseWheelScrolled(event.mouseWheelScroll);
 				break;
 
 			case sf::Event::MouseButtonPressed:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->mouseButtonPressed(event.mouseButton);
 				break;
 
 			case sf::Event::MouseButtonReleased:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->mouseButtonReleased(event.mouseButton);
 				break;
 
 			case sf::Event::MouseMoved:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->mouseMoved(event.mouseMove);
 				break;
 
 			case sf::Event::JoystickButtonPressed:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->joystickButtonPressed(event.joystickButton);
 				break;
 
 			case sf::Event::JoystickButtonReleased:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->joystickButtonReleased(event.joystickButton);
 				break;
 
 			case sf::Event::JoystickMoved:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->joystickMoved(event.joystickMove);
 				break;
 
 			case sf::Event::JoystickConnected:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->joystickConnected(event.joystickConnect);
 				break;
 
 			case sf::Event::JoystickDisconnected:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->joystickDisconnected(event.joystickConnect);
 				break;
 
 			case sf::Event::TouchBegan:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->touchBegan(event.touch);
 				break;
 
 			case sf::Event::TouchMoved:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->touchMoved(event.touch);
 				break;
 
 			case sf::Event::TouchEnded:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->touchEnded(event.touch);
 				break;
 
 			case sf::Event::SensorChanged:
-				for (InputListener* listener: inputListeners)
+				for (InputListener* listener : tmpInputListeners)
 					listener->sensorChanged(event.sensor);
 				break;
 

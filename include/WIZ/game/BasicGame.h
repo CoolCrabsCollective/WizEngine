@@ -19,8 +19,8 @@ class wiz::BasicGame : public Game {
 	const std::shared_ptr<Logger> logger;
 	const std::shared_ptr<AssetLoader> assetLoader;
 
-	std::unordered_set<InputListener*> inputListeners;
-	std::unordered_set<WindowListener*> windowListeners;
+	std::unordered_set<InputListener*> inputListeners, tmpInputListeners;
+	std::unordered_set<WindowListener*> windowListeners, tmpWindowListeners;
 
 	std::vector<std::function<void()>> runnables;
 
