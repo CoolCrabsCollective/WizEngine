@@ -159,7 +159,7 @@ void wiz::BasicGame::update() {
 		currentScreen->tick(delta);
 		lastUpdate = now;
 
-		for(void (*run)() : runnables)
+		for(const std::function<void()>& run : runnables)
 			run();
 		runnables.clear();
 
@@ -237,6 +237,6 @@ void wiz::BasicGame::removeWindowListener(wiz::WindowListener* listener) {
 	windowListeners.erase(listener);
 }
 
-void wiz::BasicGame::postRunnable(void (*runnable)()) {
+void wiz::BasicGame::postRunnable(const std::function<void()>& runnable) {
 	runnables.push_back(runnable);
 }

@@ -7,6 +7,7 @@
 
 
 #include <unordered_set>
+#include <functional>
 #include "Game.h"
 
 namespace wiz {
@@ -21,7 +22,7 @@ class wiz::BasicGame : public Game {
 	std::unordered_set<InputListener*> inputListeners;
 	std::unordered_set<WindowListener*> windowListeners;
 
-	std::vector<void (*)()> runnables;
+	std::vector<std::function<void()>> runnables;
 
 	std::shared_ptr<Screen> currentScreen = nullptr;
 
@@ -55,7 +56,7 @@ public:
 	void addWindowListener(WindowListener* listener) override;
 	void removeWindowListener(WindowListener* listener) override;
 
-	void postRunnable(void (*runnable)());
+	void postRunnable(const std::function<void()>& runnable);
 };
 
 
