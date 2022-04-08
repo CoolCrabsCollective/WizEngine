@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "PathFinder/Node.h"
 
 pf::Node::Node() :
@@ -19,7 +20,10 @@ std::vector<std::pair<pf::Node*, float>>& pf::Node::getChildren()
 
 void pf::Node::addChild(pf::Node* child, float distance)
 {
-	m_children.push_back(std::make_pair(child,distance));
+	if(child == this)
+		throw std::runtime_error("Node cannot be its own child");
+
+	m_children.emplace_back(child, distance);
 }
 
 void pf::Node::clearChildren()
@@ -29,5 +33,8 @@ void pf::Node::clearChildren()
 
 void pf::Node::setParent(pf::Node* parent)
 {
+	if(parent == this)
+		throw std::runtime_error("Node cannot be its own parent");
+
 	m_parent = parent;
 }
