@@ -1,3 +1,4 @@
+#include <iostream>
 #include "PathFinder/AStar.h"
 
 pf::AStar::AStar()
@@ -21,6 +22,7 @@ bool pf::AStar::getPath(AStarNode* start, AStarNode* goal, std::vector<AStarNode
 		currentNode = open.front(); // pop n node from open for which f is minimal
 		popOpen(currentNode);
 
+		printf("Node: %p\n", (void *)currentNode);
 		currentNode->setClosed(true);
 		closed.push_back(currentNode);
 		
