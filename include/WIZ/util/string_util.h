@@ -5,6 +5,7 @@
 #ifndef GAMETEMPLATE_STRINGUTIL_H
 #define GAMETEMPLATE_STRINGUTIL_H
 
+#include <vector>
 #include <string>
 #include <algorithm>
 #include <cctype>
