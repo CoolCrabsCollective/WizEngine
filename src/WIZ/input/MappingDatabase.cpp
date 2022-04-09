@@ -92,7 +92,7 @@ void wiz::MappingDatabase::clearMappings() {
 }
 
 bool wiz::MappingDatabase::hasMapping(const std::string& controllerName) const {
-	return map.contains(controllerName);
+	return map.find(controllerName) != map.end();
 }
 
 void wiz::MappingDatabase::loadFromCSVFile(const std::string& csvDbFile) {
