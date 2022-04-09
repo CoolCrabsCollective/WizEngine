@@ -38,7 +38,7 @@ bool pf::AStar::getPath(AStarNode* start, AStarNode* goal, std::vector<AStarNode
 				continue; // consider next successor
 
 			h = distanceBetween(childNode, goal);
-			f = g + h * 1.3f; // compute f(n')
+			f = g + h; // compute f(n')
 			childNode->setF(f);
 			childNode->setG(g);
 			childNode->setH(h);
