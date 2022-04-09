@@ -112,7 +112,7 @@ file(GLOB SOURCE_FILES
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 
-if(NOT CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
+if(NOT CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake" AND NOT ANDROID)
     FetchContent_Declare(googletest
             GIT_REPOSITORY https://github.com/google/googletest.git
             GIT_TAG ${GTEST_COMMIT})
