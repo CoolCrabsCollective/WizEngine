@@ -61,20 +61,20 @@ endif()
 
 # Fetches SFML dependency and loads its CMakeLists.txt
 include(FetchContent)
-if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
-    FetchContent_Declare(sfml
-            GIT_REPOSITORY https://github.com/WheezyWiseWizards/SFML-switch.git
-            GIT_TAG ${SFML_SWITCH_COMMIT})
-else()
-    FetchContent_Declare(sfml
-            GIT_REPOSITORY https://github.com/SFML/SFML.git
-            GIT_TAG ${SFML_COMMIT})
-endif()
-FetchContent_MakeAvailable(sfml)
+#if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
+#    FetchContent_Declare(sfml
+#            GIT_REPOSITORY https://github.com/WheezyWiseWizards/SFML-switch.git
+#            GIT_TAG ${SFML_SWITCH_COMMIT})
+#else()
+#    FetchContent_Declare(sfml
+#            GIT_REPOSITORY https://github.com/SFML/SFML.git
+#            GIT_TAG ${SFML_COMMIT})
+#endif()
+#FetchContent_MakeAvailable(sfml)
 
 # this creates the variables SFML_SOURCE_DIR, SFML_BINARY_DIR and SFML_POPULATED
 # then SFML_SOURCE_DIR is used below to include the header files
-FetchContent_GetProperties(SFML)
+#FetchContent_GetProperties(SFML)
 
 # Fetches Box2D dependency and loads its CMakeLists.txt
 FetchContent_Declare(Box2D
