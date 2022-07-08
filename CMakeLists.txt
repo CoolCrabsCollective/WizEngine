@@ -71,6 +71,9 @@ include(FetchContent)
 #            GIT_TAG ${SFML_COMMIT})
 #endif()
 #FetchContent_MakeAvailable(sfml)
+set(SFML_SOURCE_DIR /home/william/SFML/SFML)
+set(SFML_LIBRARY_DIR /home/william/SFML/SFML/build/armeabi-v7a/lib)
+link_directories("${SFML_LIBRARY_DIR}")
 
 # this creates the variables SFML_SOURCE_DIR, SFML_BINARY_DIR and SFML_POPULATED
 # then SFML_SOURCE_DIR is used below to include the header files
