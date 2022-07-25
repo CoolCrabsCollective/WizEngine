@@ -71,9 +71,14 @@ include(FetchContent)
 #            GIT_TAG ${SFML_COMMIT})
 #endif()
 #FetchContent_MakeAvailable(sfml)
-set(SFML_SOURCE_DIR /home/william/SFML/SFML)
-set(SFML_LIBRARY_DIR /home/william/SFML/SFML/build/armeabi-v7a/lib)
-link_directories("${SFML_LIBRARY_DIR}")
+
+set(SFML_INCLUDE_DIR /home/william/android-ndk-r19/sources/third_party/sfml/include)
+set(SFML_LIBRARY_DIR /home/william/android-ndk-r19/sources/third_party/sfml/lib/)
+set(SFML_EXT_LIBRARY_DIR /home/william/android-ndk-r19/sources/third_party/sfml/extlibs/lib/)
+
+include_directories(${SFML_INCLUDE_DIR})
+link_directories("${SFML_LIBRARY_DIR}${ANDROID_ABI}/")
+link_directories("${SFML_EXT_LIBRARY_DIR}${ANDROID_ABI}/")
 
 # this creates the variables SFML_SOURCE_DIR, SFML_BINARY_DIR and SFML_POPULATED
 # then SFML_SOURCE_DIR is used below to include the header files
