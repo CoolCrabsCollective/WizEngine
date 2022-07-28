@@ -5,6 +5,7 @@ set(SFML_COMMIT 8f6903d00853fd3db395a557733ae65a14f37c01)
 set(SFML_SWITCH_COMMIT master)
 set(BOX2D_CMAKE_COMMIT master)
 set(GTEST_COMMIT e2239ee6043f73722e7aa812a459f54a28552929) # Version 1.11.0
+set(TGUI_COMMIT v0.9.5)
 
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     # Not for windows because windres.exe doesn't support those
@@ -83,6 +84,13 @@ FetchContent_Declare(Box2D
 FetchContent_MakeAvailable(Box2D)
 FetchContent_GetProperties(Box2D SOURCE_DIR Box2D_SOURCE_DIR)
 
+# Fetches tgui dependency and loads its cmake
+FetchContent_Declare(tgui
+	GIT_REPOSITORY https://github.com/texus/TGUI.git
+	GIT_TAG ${TGUI_COMMIT})
+FetchContent_MakeAvailable(tgui)
+FetchContent_GetProperties(tgui SOURCE_DIR tgui_SOURCE_DIR)
+
 # Other dependencies
 
 set(OpenGL_GL_PREFERENCE GLVND)
@@ -90,25 +98,19 @@ find_package(OpenGL)
 find_package(Threads REQUIRED)
 
 # include and source files
-include_directories(include ${SFML_SOURCE_DIR}/include ${Box2D_SOURCE_DIR}/Box2D/Box2D)
+include_directories(include ${SFML_SOURCE_DIR}/include ${Box2D_SOURCE_DIR}/Box2D/Box2D ${tgui_SOURCE_DIR}/include)
 
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     include_directories(${LIBNX_INCLUDE_DIR})
 endif()
 
-file(GLOB SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/src/*.cpp
-        ${PROJECT_SOURCE_DIR}/include/*.inl
-        ${PROJECT_SOURCE_DIR}/include/*.h
-        ${PROJECT_SOURCE_DIR}/include/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/*/*.cpp
-        ${PROJECT_SOURCE_DIR}/include/*/*.inl
-        ${PROJECT_SOURCE_DIR}/include/*/*.h
-        ${PROJECT_SOURCE_DIR}/include/*/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/*/*/*.cpp
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.inl
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.h
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.hpp)
+# Retrieve source files
+file(GLOB_RECURSE CPP_SOURCE_FILES src/*.cpp)
+file(GLOB_RECURSE H_SOURCE_FILES include/*.h)
+file(GLOB_RECURSE HPP_SOURCE_FILES include/*.hpp)
+file(GLOB_RECURSE INL_SOURCE_FILES include/*.inl)
+set(SOURCE_FILES ${CPP_SOURCE_FILES} ${H_SOURCE_FILES} ${HPP_SOURCE_FILES} ${INL_SOURCE_FILES})
+
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 

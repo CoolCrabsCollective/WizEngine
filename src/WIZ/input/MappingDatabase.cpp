@@ -45,7 +45,7 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
 		std::vector<std::string> bindings = wiz::split(line, ',');
 
 		wiz::Mapping mapping;
-		for(int i = 2; i < bindings.size(); i++)
+		for(size_t i = 2; i < bindings.size(); i++)
 		{
 			std::vector<std::string> parts = wiz::split(bindings[i], ':');
 			if(parts[0] == "a")

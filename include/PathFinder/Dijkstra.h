@@ -5,82 +5,72 @@
 #include <vector>
 
 namespace pf {
-	class DijkstraNode : public Node
-	{
+	class DijkstraNode : public Node {
 		static const float infinity;
 
-		public:
-			DijkstraNode() :
-				distance(infinity),
-				closed(false)
-			{}
+	protected:
+		bool closed;
+		float distance;
 
-			~DijkstraNode()
-			{}
+	public:
+		DijkstraNode() :
+			closed(false),
+			distance(infinity) {}
 
-			void setClosed(bool value)
-			{
-				closed = value;
-			}
+		~DijkstraNode() override = default;
 
-			void setDistance(float value)
-			{
-				distance = value;
-			}
+		void setClosed(bool value) {
+			closed = value;
+		}
 
-			inline bool isClosed() const
-			{
-				return closed;
-			}
+		void setDistance(float value) {
+			distance = value;
+		}
 
-			inline float getDistance() const
-			{
-				return distance;
-			}
+		[[nodiscard]]
+		inline bool isClosed() const {
+			return closed;
+		}
 
-			void release()
-			{
-				distance = infinity;
-				closed = false;
-				m_parent = nullptr;
-			}
+		[[nodiscard]]
+		inline float getDistance() const {
+			return distance;
+		}
 
-		protected:
-			bool closed;
-			float distance;
+		void release() {
+			distance = infinity;
+			closed = false;
+			m_parent = nullptr;
+		}
 	};
 
-	struct CompareNodes
-	{
-		bool operator() (const DijkstraNode* n1, const DijkstraNode* n2)
-		{
+	struct CompareNodes {
+		bool operator() (const DijkstraNode* n1, const DijkstraNode* n2) {
 			return n1->getDistance() < n2->getDistance();
 		}
 	};
 
-	class Dijkstra : public pf::PathAlgorithm<DijkstraNode>
-	{
-		public:
+	class Dijkstra : public pf::PathAlgorithm<DijkstraNode> {
+		std::vector<DijkstraNode*> open, closed;
 
-			static Dijkstra& getInstance()
-			{
-				static Dijkstra instance;
-				return instance;
-			}
+	public:
+		static Dijkstra& getInstance() {
+			static Dijkstra instance;
+			return instance;
+		}
 
-			bool getPath(DijkstraNode* start, DijkstraNode* goal, std::vector<DijkstraNode*>& path);
-			void clear();
+		bool getPath(DijkstraNode* start,
+					 DijkstraNode* goal,
+					 std::vector<DijkstraNode*>& path) override;
+		void clear() override;
 
-		private:
+	private:
+		Dijkstra();
+		~Dijkstra();
 
-			Dijkstra();
-			~Dijkstra();
-
-			void pushOpen(DijkstraNode* node);
-			void popOpen(DijkstraNode* node);
-			void releaseNodes();
-
-			std::vector<DijkstraNode*> open, closed;
+		void pushOpen(DijkstraNode* node);
+		void popOpen(DijkstraNode* node);
+		void releaseNodes();
 	};
 }
 
