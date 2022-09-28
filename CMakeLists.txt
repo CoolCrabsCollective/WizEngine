@@ -90,7 +90,7 @@ find_package(OpenGL)
 find_package(Threads REQUIRED)
 
 # include and source files
-include_directories(include ${SFML_SOURCE_DIR}/include ${Box2D_SOURCE_DIR}/Box2D/Box2D)
+include_directories(include ${SFML_SOURCE_DIR}/include ${Box2D_SOURCE_DIR}/Box2D ${Box2D_SOURCE_DIR}/Box2D/Box2D)
 
 if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     include_directories(${LIBNX_INCLUDE_DIR})
