@@ -21,10 +21,10 @@ namespace wiz {
 		Right_Stick,
 		Back,
 		Start,
-        Dpad_Right,
-        Dpad_Up,
-        Dpad_Left,
-        Dpad_Down,
+		Dpad_Right,
+		Dpad_Up,
+		Dpad_Left,
+		Dpad_Down,
 		Count
 	};
 }
