@@ -72,6 +72,14 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
 				mapping.set(wiz::MapButton::Left_Stick, std::stoi(parts[1].substr(1)));
 			else if(parts[0] == "rightstick")
 				mapping.set(wiz::MapButton::Right_Stick, std::stoi(parts[1].substr(1)));
+            else if(parts[0] == "dpright")
+                mapping.set(wiz::MapButton::Dpad_Right, std::stoi(parts[1].substr(1)));
+            else if(parts[0] == "dpup")
+                mapping.set(wiz::MapButton::Dpad_Up, std::stoi(parts[1].substr(1)));
+            else if(parts[0] == "dpleft")
+                mapping.set(wiz::MapButton::Dpad_Left, std::stoi(parts[1].substr(1)));
+            else if(parts[0] == "dpdown")
+                mapping.set(wiz::MapButton::Dpad_Down, std::stoi(parts[1].substr(1)));
 		}
 
 		addMapping(bindings[1], mapping);
