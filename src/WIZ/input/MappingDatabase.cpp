@@ -47,6 +47,9 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
 		wiz::Mapping mapping;
 		for(int i = 2; i < bindings.size(); i++)
 		{
+			if(parts[1].substr(1).starts_with("+"))
+				continue;
+			
 			std::vector<std::string> parts = wiz::split(bindings[i], ':');
 			if(parts[0] == "a")
 				mapping.set(wiz::MapButton::A, std::stoi(parts[1].substr(1)));
