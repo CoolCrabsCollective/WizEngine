@@ -20,6 +20,7 @@ namespace wiz {
  * UI element for NPC dialogs, draws a box in the bottom of the screen with text
  */
 class wiz::DialogBox : public sf::Drawable {
+protected:
 
 	static const int lineMaxChars = 78;
 
