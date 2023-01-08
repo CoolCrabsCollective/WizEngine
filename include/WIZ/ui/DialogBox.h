@@ -57,13 +57,13 @@ public:
 	/**
 	 * Called when the player interacts with the dialog to progress through the text
 	 */
-	void interact();
+	virtual void interact();
 
 	/**
 	 * Updates the dialog box, must be called every frame
 	 * @param delta
 	 */
-	void update(float delta);
+	virtual void update(float delta);
 
 	/**
 	 * Starts a dialog given a vector of lines to display in order
@@ -71,18 +71,17 @@ public:
 	 * @param lines lines to display
 	 * @param callback callback to call after the dialog is over, warning DO NOT start a new dialog in the callback
 	 */
-	void
-	startDialog(const std::vector<std::string>& lines, std::function<void()> callback = []() {});
+	virtual void startDialog(const std::vector<std::string>& lines, std::function<void()> callback = []() {});
 
 	/**
 	 * @return true if currently displaying, otherwise false
 	 */
-	bool isInProgress() const;
+	virtual bool isInProgress() const;
 
 	/**
 	 * Draws the dialog on screen
 	 */
-	void draw(sf::RenderTarget& target, const sf::RenderStates& states) const override;
+	virtual void draw(sf::RenderTarget& target, const sf::RenderStates& states) const override;
 };
 
 
