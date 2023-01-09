@@ -22,9 +22,7 @@ namespace wiz {
 class wiz::DialogBox : public sf::Drawable {
 protected:
 
-	static const int lineMaxChars = 78;
-
-	static std::vector<std::vector<std::string>> processText(const std::vector<std::string>& text);
+    std::vector<std::vector<std::string>> processText(const std::vector<std::string>& text);
 
 	std::vector<std::vector<std::string>> dialog;
 	float currentTextProgressTime = 0.0f;
@@ -45,6 +43,8 @@ protected:
 	void complete();
 
 	void setDialogDuration();
+
+    virtual int getMaxCharsPerLine() const;
 
 public:
 

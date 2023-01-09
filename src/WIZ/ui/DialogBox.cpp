@@ -86,7 +86,7 @@ void DialogBox::next() {
 		currentMaximumProgressTime = maximumTextProgressTime *
 									 (static_cast<float>(dialog[dialogIndex][0].size() +
 														 dialog[dialogIndex][1].size()) /
-									  static_cast<float>(lineMaxChars));
+									  static_cast<float>(getMaxCharsPerLine()));
 }
 
 void DialogBox::complete() {
@@ -113,7 +113,7 @@ DialogBox::processText(const std::vector<std::string>& inputText) {
 		bool done = false;
 		std::vector<std::string> screen_text;
 		do {
-			if (remainingString.size() <= lineMaxChars) {
+			if (remainingString.size() <= getMaxCharsPerLine()) {
 				if (screen_text.size() == 2) {
 					outputText.push_back(screen_text);
 					screen_text.clear();
@@ -122,7 +122,7 @@ DialogBox::processText(const std::vector<std::string>& inputText) {
 				done = true;
 			} else {
 				int split_index = 0;
-				for (int i = lineMaxChars - 1; i >= 0; i--) {
+				for (int i = getMaxCharsPerLine() - 1; i >= 0; i--) {
 					if (remainingString[i] == ' ' || remainingString[i] == '-') {
 						split_index = i;
 						break;
@@ -149,5 +149,9 @@ void DialogBox::setDialogDuration() {
 	currentMaximumProgressTime = maximumTextProgressTime *
 								 (static_cast<float>(dialog[dialogIndex][0].size() +
 													 dialog[dialogIndex][1].size()) /
-								  static_cast<float>(lineMaxChars));
+								  static_cast<float>(getMaxCharsPerLine()));
+}
+
+int DialogBox::getMaxCharsPerLine() const {
+    return 78;
 }
