@@ -17,17 +17,17 @@ class wiz::MappingDatabase {
 	std::map<std::string, Mapping> map;
 	static MappingDatabase instance;
 public:
-    void loadFromCSVFile(const std::string& csvDbFile);
+	void loadFromCSVFile(const std::string& csvDbFile);
 
-    void loadFromCSV(const std::string& csvDbContent);
+	void loadFromCSV(const std::string& csvDbContent);
 
-    void addMapping(const std::string& vendorId, const std::string& productId, wiz::Mapping mapping);
+	void addMapping(const std::string& vendorId, const std::string& productId, wiz::Mapping mapping);
 
-    void clearMappings();
+	void clearMappings();
 
-    const wiz::Mapping& getMapping(const std::string& vendorId, const std::string& productId) const;
+	const wiz::Mapping& getMapping(const std::string& vendorId, const std::string& productId) const;
 
-    bool hasMapping(const std::string& vendorId, const std::string& productId) const;
+	bool hasMapping(const std::string& vendorId, const std::string& productId) const;
 
 	static const MappingDatabase& getInstance();
 };
