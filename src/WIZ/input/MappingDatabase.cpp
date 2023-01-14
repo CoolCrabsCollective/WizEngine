@@ -82,9 +82,9 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
                 else if(parts[0] == "lefty")
                     mapping.set(wiz::MapAxis::Left_Y, std::stoi(parts[1].substr(1)));
                 else if(parts[0] == "rightx")
-                    mapping.set(wiz::MapAxis::Left_X, std::stoi(parts[1].substr(1)));
+                    mapping.set(wiz::MapAxis::Right_X, std::stoi(parts[1].substr(1)));
                 else if(parts[0] == "righty")
-                    mapping.set(wiz::MapAxis::Left_Y, std::stoi(parts[1].substr(1)));
+                    mapping.set(wiz::MapAxis::Right_Y, std::stoi(parts[1].substr(1)));
 			}
 			catch(const std::invalid_argument& ex)
 			{
