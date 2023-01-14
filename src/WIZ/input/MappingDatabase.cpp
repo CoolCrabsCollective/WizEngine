@@ -109,7 +109,7 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
             std::string reorderVendorId = vendorId.substr(2, 2) + vendorId.substr(0, 2);
             std::string reorderProductId = productId.substr(2, 2) + productId.substr(0, 2);
 
-			addMapping(std::stoi(reorderVendorId), std::stoi(reorderProductId), mapping);
+			addMapping(std::stoi(reorderVendorId, 0, 16), std::stoi(reorderProductId, 0, 16), mapping);
 		}
 	}
 #endif
