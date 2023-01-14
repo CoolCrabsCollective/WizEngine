@@ -30,7 +30,7 @@ class wiz::TilePathFinder {
 	const b2Vec2 tileStart;
 	const b2Vec2 tileEnd;
 public:
-	TilePathFinder(const wiz::Logger& logger, 
+	TilePathFinder(const wiz::Logger& logger,
 				   const b2Vec2& tileSize,
 				   const b2Vec2& tileStart,
 				   const b2Vec2& tileEnd);
@@ -57,7 +57,7 @@ private:
 	uint32_t keyOf(b2Vec2 position) const;
 
 	uint32_t keyOf(sf::Vector2i tile) const;
-	
+
 	friend class PathFinderDebugDrawable;
 };
 

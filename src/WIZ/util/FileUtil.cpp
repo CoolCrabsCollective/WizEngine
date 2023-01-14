@@ -12,13 +12,13 @@ int internal_mkdir(const char *path) {
 #endif
 }
 
-bool wiz::directory_exists(const char* directory) {
+bool wiz::directoryExists(const char* directory) {
     struct stat st;
     stat(directory, &st);
     return st.st_mode & S_IFDIR;
 }
 
-int wiz::ensure_directory(const char* path) {
+int wiz::ensureDirectory(const char* path) {
     std::string current_level;
     std::string level;
     std::stringstream ss(path);
@@ -28,7 +28,7 @@ int wiz::ensure_directory(const char* path) {
         current_level += level; // append folder to the current level
 
         // create current level
-        if (!directory_exists(current_level.c_str()) && internal_mkdir(current_level.c_str()) != 0)
+        if (!directoryExists(current_level.c_str()) && internal_mkdir(current_level.c_str()) != 0)
             return -1;
 
         current_level += "/"; // don't forget to append a slash
@@ -37,10 +37,10 @@ int wiz::ensure_directory(const char* path) {
     return 0;
 }
 
-bool wiz::directory_exists(const std::string& directory) {
-    return directory_exists(directory.c_str());
+bool wiz::directoryExists(const std::string& directory) {
+    return directoryExists(directory.c_str());
 }
 
-int wiz::ensure_directory(const std::string& path) {
-    return ensure_directory(path.c_str());
+int wiz::ensureDirectory(const std::string& path) {
+    return ensureDirectory(path.c_str());
 }

@@ -21,12 +21,21 @@ namespace wiz {
 		Right_Stick,
 		Back,
 		Start,
-		Count
+		MapButton_Count
+	};
+
+	enum MapAxis {
+		Left_X,
+		Left_Y,
+		Right_X,
+		Right_Y,
+		MapAxis_Count
 	};
 }
 
 class wiz::Mapping {
-	int map[MapButton::Count];
+	int buttonMap[MapButton::MapButton_Count];
+	int axisMap[MapAxis::MapAxis_Count];
 public:
 	Mapping();
 
@@ -46,7 +55,25 @@ public:
 	 */
 	int getButton(MapButton mapButton) const;
 
+	/**
+	 * Checks if this mapping has the given mapped axis
+	 *
+	 * @param mapAxis axis to check
+	 * @return true if the axis is present in the mapping, otherwise false
+	 */
+	bool hasAxis(MapAxis mapAxis) const;
+
+	/**
+	 * Returns the axis number for the specified mapped axis
+	 *
+	 * @param mapAxis axis
+	 * @return axis number
+	 */
+	int getAxis(MapAxis mapAxis) const;
+
 	void set(MapButton mapButton, int value);
+
+	void set(MapAxis mapAxis, int value);
 };
 
 
