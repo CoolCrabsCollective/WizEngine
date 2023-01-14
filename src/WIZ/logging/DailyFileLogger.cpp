@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <sstream>
 #include <WIZ/util/FileUtil.h>
-#include <WIZ/util/StingUtil.h>
+#include <WIZ/util/StringUtil.h>
 #include <WIZ/logging/DailyFileLogger.h>
 
 
