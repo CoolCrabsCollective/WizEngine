@@ -10,8 +10,8 @@
 
 wiz::MappingDatabase wiz::MappingDatabase::instance;
 
-const wiz::Mapping& wiz::MappingDatabase::getMapping(const std::string& controllerName) const {
-	return map.at(controllerName);
+const wiz::Mapping& wiz::MappingDatabase::getMapping(const std::string& vendorId, const std::string& productId) const {
+	return map.at(vendorId + productId);
 }
 
 void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
@@ -49,7 +49,7 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
 		for(int i = 2; i < bindings.size(); i++)
 		{
 			std::vector<std::string> parts = wiz::split(bindings[i], ':');
-			
+
 			try
 			{
 				if(parts[0] == "a")
@@ -75,15 +75,30 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
 				else if(parts[0] == "leftstick")
 					mapping.set(wiz::MapButton::Left_Stick, std::stoi(parts[1].substr(1)));
 				else if(parts[0] == "rightstick")
-					mapping.set(wiz::MapButton::Right_Stick, std::stoi(parts[1].substr(1)));	
+					mapping.set(wiz::MapButton::Right_Stick, std::stoi(parts[1].substr(1)));
 			}
 			catch(const std::invalid_argument& ex)
 			{
-				
+
 			}
 		}
 
-		addMapping(bindings[1], mapping);
+		/*
+		 * This hacky solution of fetching the product from GUID in the dataset was found from our own testing, and then
+		 * we found that it matched this solution here:
+		 * https://github.com/GuidoBisocoli/SFML_GamepadSupport/blob/main/Gamepad.cpp
+		 *
+		 * We don't know for certain how many controllers it actually works with, but it seems to work with all the
+		 * common ones we have tested.
+		 */
+
+		std::string guid = bindings[0];
+		if (guid.length() > 19) { // there can be some fields in bindings[0] that are not GUIDs
+			std::string vendorId = guid.substr(10, 2) + guid.substr(8, 2);
+			std::string productId = guid.substr(18,2) + guid.substr(16, 2);
+
+			addMapping(vendorId, productId, mapping);
+		}
 	}
 #endif
 }
@@ -92,16 +107,16 @@ const wiz::MappingDatabase& wiz::MappingDatabase::getInstance() {
 	return wiz::MappingDatabase::instance;
 }
 
-void wiz::MappingDatabase::addMapping(const std::string& controllerName, wiz::Mapping mapping) {
-	map[controllerName] = mapping;
+void wiz::MappingDatabase::addMapping(const std::string& vendorId, const std::string& productId, wiz::Mapping mapping) {
+	map[vendorId + productId] = mapping;
 }
 
 void wiz::MappingDatabase::clearMappings() {
 	map.clear();
 }
 
-bool wiz::MappingDatabase::hasMapping(const std::string& controllerName) const {
-	return map.find(controllerName) != map.end();
+bool wiz::MappingDatabase::hasMapping(const std::string& vendorId, const std::string& productId) const {
+	return map.find(vendorId + productId) != map.end();
 }
 
 void wiz::MappingDatabase::loadFromCSVFile(const std::string& csvDbFile) {

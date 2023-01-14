@@ -48,9 +48,9 @@ TEST(mapping, test_load_from_csv)
 						 "050000005769696d6f74652028313800,Wii U Pro Controller,a:b16,b:b15,back:b7,dpdown:b12,dpleft:b13,dpright:b14,dpup:b11,guide:b8,leftshoulder:b19,leftstick:b23,lefttrigger:b21,leftx:a0,lefty:a1,rightshoulder:b20,rightstick:b24,righttrigger:b22,rightx:a2,righty:a3,start:b6,x:b18,y:b17,platform:Mac OS X,");
 #endif
 
-	ASSERT_TRUE(database.hasMapping("Test Controller"));
+	ASSERT_TRUE(database.hasMapping("0000", "0000"));
 
-	wiz::Mapping mapping = database.getMapping("Test Controller");
+	wiz::Mapping mapping = database.getMapping("0000", "0000");
 
 	ASSERT_EQ(mapping.getButton(wiz::MapButton::A), 2);
 	ASSERT_EQ(mapping.getButton(wiz::MapButton::B), 1);

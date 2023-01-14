@@ -21,13 +21,13 @@ public:
 
 	void loadFromCSV(const std::string& csvDbContent);
 
-	void addMapping(const std::string& controllerName, Mapping mapping);
+	void addMapping(const std::string& vendorId, const std::string& productId, wiz::Mapping mapping);
 
 	void clearMappings();
 
-	const Mapping& getMapping(const std::string& controllerName) const;
+	const wiz::Mapping& getMapping(const std::string& vendorId, const std::string& productId) const;
 
-	bool hasMapping(const std::string& controllerName) const;
+	bool hasMapping(const std::string& vendorId, const std::string& productId) const;
 
 	static const MappingDatabase& getInstance();
 };
