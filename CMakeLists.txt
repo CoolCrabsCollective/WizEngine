@@ -96,19 +96,7 @@ if(CMAKE_TOOLCHAIN_FILE MATCHES ".*DevkitA64Libnx.cmake")
     include_directories(${LIBNX_INCLUDE_DIR})
 endif()
 
-file(GLOB SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/src/*.cpp
-        ${PROJECT_SOURCE_DIR}/include/*.inl
-        ${PROJECT_SOURCE_DIR}/include/*.h
-        ${PROJECT_SOURCE_DIR}/include/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/*/*.cpp
-        ${PROJECT_SOURCE_DIR}/include/*/*.inl
-        ${PROJECT_SOURCE_DIR}/include/*/*.h
-        ${PROJECT_SOURCE_DIR}/include/*/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/*/*/*.cpp
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.inl
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.h
-        ${PROJECT_SOURCE_DIR}/include/*/*/*.hpp)
+file(GLOB_RECURSE SOURCE_FILES "${PROJECT_SOURCE_DIR}/src/*.cpp" "${PROJECT_SOURCE_DIR}/include/*.h" "${PROJECT_SOURCE_DIR}/include/*.inl" "${PROJECT_SOURCE_DIR}/include/*.hpp")
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 

@@ -5,14 +5,13 @@
 #include <fstream>
 #include <sstream>
 #include "WIZ/input/MappingDatabase.h"
-#include "WIZ/util/StringUtil.h"
-#include "WIZ/util/MathUtil.h"
+#include "WIZ/util/string_util.h"
 #include <stdexcept>
 
 wiz::MappingDatabase wiz::MappingDatabase::instance;
 
-const wiz::Mapping& wiz::MappingDatabase::getMapping(uint16_t vendorId, uint16_t productId) const {
-	return map.at(std::make_pair(vendorId, productId));
+const wiz::Mapping& wiz::MappingDatabase::getMapping(const std::string& vendorId, const std::string& productId) const {
+	return map.at(vendorId + productId);
 }
 
 void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
@@ -77,14 +76,6 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
 					mapping.set(wiz::MapButton::Left_Stick, std::stoi(parts[1].substr(1)));
 				else if(parts[0] == "rightstick")
 					mapping.set(wiz::MapButton::Right_Stick, std::stoi(parts[1].substr(1)));
-                else if(parts[0] == "leftx")
-                    mapping.set(wiz::MapAxis::Left_X, std::stoi(parts[1].substr(1)));
-                else if(parts[0] == "lefty")
-                    mapping.set(wiz::MapAxis::Left_Y, std::stoi(parts[1].substr(1)));
-                else if(parts[0] == "rightx")
-                    mapping.set(wiz::MapAxis::Right_X, std::stoi(parts[1].substr(1)));
-                else if(parts[0] == "righty")
-                    mapping.set(wiz::MapAxis::Right_Y, std::stoi(parts[1].substr(1)));
 			}
 			catch(const std::invalid_argument& ex)
 			{
@@ -106,7 +97,7 @@ void wiz::MappingDatabase::loadFromCSV(const std::string& csvDbContent) {
 			std::string vendorId = guid.substr(10, 2) + guid.substr(8, 2);
 			std::string productId = guid.substr(18,2) + guid.substr(16, 2);
 
-			addMapping(std::stoi(vendorId, 0, 16), std::stoi(productId, 0, 16), mapping);
+			addMapping(vendorId, productId, mapping);
 		}
 	}
 #endif
@@ -116,16 +107,16 @@ const wiz::MappingDatabase& wiz::MappingDatabase::getInstance() {
 	return wiz::MappingDatabase::instance;
 }
 
-void wiz::MappingDatabase::addMapping(uint16_t vendorId, uint16_t productId, wiz::Mapping mapping) {
-	map[std::make_pair(vendorId, productId)] = mapping;
+void wiz::MappingDatabase::addMapping(const std::string& vendorId, const std::string& productId, wiz::Mapping mapping) {
+	map[vendorId + productId] = mapping;
 }
 
 void wiz::MappingDatabase::clearMappings() {
 	map.clear();
 }
 
-bool wiz::MappingDatabase::hasMapping(uint16_t vendorId, uint16_t productId) const {
-	return map.find(std::make_pair(vendorId, productId)) != map.end();
+bool wiz::MappingDatabase::hasMapping(const std::string& vendorId, const std::string& productId) const {
+	return map.find(vendorId + productId) != map.end();
 }
 
 void wiz::MappingDatabase::loadFromCSVFile(const std::string& csvDbFile) {
@@ -133,12 +124,4 @@ void wiz::MappingDatabase::loadFromCSVFile(const std::string& csvDbFile) {
 	std::stringstream buffer;
 	buffer << stream.rdbuf();
 	loadFromCSV(buffer.str());
-}
-
-const wiz::Mapping &wiz::MappingDatabase::getMapping(const sf::Joystick::Identification& id) const {
-    return getMapping(id.vendorId, id.productId);
-}
-
-bool wiz::MappingDatabase::hasMapping(const sf::Joystick::Identification& id) const {
-    return hasMapping(id.vendorId, id.productId);
 }

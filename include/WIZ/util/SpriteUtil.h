@@ -12,14 +12,14 @@
 
 namespace wiz {
 	inline void setSpriteSize(sf::Sprite& sprite, sf::Vector2f worldUnitSize) {
-		sprite.setScale({ worldUnitSize.x / static_cast<float>(sprite.getTexture()->getSize().x),
-						  worldUnitSize.y / static_cast<float>(sprite.getTexture()->getSize().y) });
+		sprite.setScale({ worldUnitSize.x / static_cast<float>(sprite.getTextureRect().width),
+						  worldUnitSize.y / static_cast<float>(sprite.getTextureRect().height) });
 	}
 
 	inline void setSpriteOrigin(sf::Sprite& sprite, sf::Vector2f localOrigin) {
 		sprite.setOrigin({
-		   localOrigin.x * static_cast<float>(sprite.getTexture()->getSize().x),
-		   localOrigin.y * static_cast<float>(sprite.getTexture()->getSize().y)
+		   localOrigin.x * static_cast<float>(sprite.getTextureRect().width),
+		   localOrigin.y * static_cast<float>(sprite.getTextureRect().height)
 		});
 	}
 
