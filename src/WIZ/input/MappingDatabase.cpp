@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "WIZ/input/MappingDatabase.h"
-#include "WIZ/util/string_util.h"
+#include "WIZ/util/StringUtil.h"
 #include <stdexcept>
 
 wiz::MappingDatabase wiz::MappingDatabase::instance;
