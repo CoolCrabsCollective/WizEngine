@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <sstream>
 #include <WIZ/util/FileUtil.h>
-#include <WIZ/util/string_util.h>
+#include <WIZ/util/StringUtil.h>
 #include <WIZ/logging/DailyFileLogger.h>
 
 
@@ -46,7 +46,7 @@ std::ofstream& wiz::DailyFileLogger::getCurrentFile() const {
         file.close();
         curFile = presentFile;
 
-        if(ensure_directory(directory) != 0)
+        if(ensureDirectory(directory) != 0)
             throw std::runtime_error("Failed to create directory " + directory + " for logging");
 
         std::string fileName = directory + curFile;

@@ -19,9 +19,9 @@ namespace wiz {
 	 * @param directory path to the folder to check.
 	 * @return true if the folder exists, false otherwise.
 	 */
-	bool directory_exists(const char* directory);
+	bool directoryExists(const char* directory);
 
-	bool directory_exists(const std::string& directory);
+	bool directoryExists(const std::string& directory);
 
 	/**
 	 * Recursively create directories for the given path
@@ -29,9 +29,9 @@ namespace wiz {
 	 * @param[in] path the full path of the directory to create.
 	 * @return zero on success, otherwise -1.
 	 */
-	int ensure_directory(const char* path);
+	int ensureDirectory(const char* path);
 
-	int ensure_directory(const std::string& path);
+	int ensureDirectory(const std::string& path);
 }
 
 #endif //GAMETEMPLATE_FILEUTIL_H
